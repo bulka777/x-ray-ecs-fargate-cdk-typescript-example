@@ -1,8 +1,14 @@
 {
-  "name": "template",
-  "version": "0.1.0",
+  "name": "cdk-template",
+  "version": "1.0.0",
+  "description": "Template for CDK projects",
+  "author": {
+    "email": "timurabduljalil@gmail.com",
+    "name": "Timur Abduljalil"
+  },
+  "license": "MIT",
   "bin": {
-    "template": "bin/template.js"
+    "template": "infrastructure/bin/template.js"
   },
   "scripts": {
     "build": "tsc",
