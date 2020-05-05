@@ -1,0 +1,19 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-new": "off",
+    "max-len": ["error", { "code": 150 }],
+    "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": ["warn"]
+  }
+}

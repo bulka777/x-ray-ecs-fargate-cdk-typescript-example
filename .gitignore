@@ -1,4 +1,4 @@
-*.js
+*/*.js
 !jest.config.js
 *.d.ts
 node_modules
@@ -10,3 +10,4 @@ cdk.out
 # Parcel build directories
 .cache
 .build
+template.yml
