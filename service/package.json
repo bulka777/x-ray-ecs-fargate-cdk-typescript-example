@@ -1,0 +1,17 @@
+{
+  "name": "example-node-service",
+  "version": "1.0.0",
+  "description": "Node service to run in ECS",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.0"
+  },
+  "devDependencies": {
+    
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Timur Abduljalil <timurabduljalil@gmail.com>",
+  "license": "ISC"
+}
