@@ -1,7 +1,7 @@
 {
-  "name": "cdk-template",
+  "name": "x-ray-ecs-fargate-cdk-typescript-example",
   "version": "1.0.0",
-  "description": "Template for CDK projects",
+  "description": "Example showing how to set up xray with ecs fargate project",
   "author": {
     "email": "timurabduljalil@gmail.com",
     "name": "Timur Abduljalil"
