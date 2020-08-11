@@ -20,12 +20,12 @@ export class FargateServiceStack extends cdk.Stack {
     const topic = new sns.Topic(this, 'XRayExampleTopic', { topicName: 'x-ray-example-topic' });
     topic.addSubscription(new sub.SqsSubscription(queue, { rawMessageDelivery: true }));
 
-    const fn = new lambda.Function(this, 'XRayExampleFunction', {
-      code: lambda.Code.fromAsset('functions'),
-      handler: 'handler.processEvent',
-      runtime: lambda.Runtime.NODEJS_12_X,
-    });
-    fn.addEventSource(new sources.SqsEventSource(queue));
+    // const fn = new lambda.Function(this, 'XRayExampleFunction', {
+    //   code: lambda.Code.fromAsset('functions'),
+    //   handler: 'handler.processEvent',
+    //   runtime: lambda.Runtime.NODEJS_12_X,
+    // });
+    // fn.addEventSource(new sources.SqsEventSource(queue));
 
     const taskRole = new iam.Role(this, 'TaskRole', {
       assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
