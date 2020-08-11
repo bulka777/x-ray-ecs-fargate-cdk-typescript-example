@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/first */
 /* eslint-disable import/order */
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -17,7 +18,9 @@ const app = express();
 app.use(AWSXRay.express.openSegment('MyApp'));
 
 app.get('/', async (req, res) => {
+  console.log('Received request...processing');
   const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
+  console.log('Finished processing. Response: ', response);
   res.send(response);
 });
 
