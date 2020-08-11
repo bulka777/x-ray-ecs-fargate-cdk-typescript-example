@@ -1,12 +1,31 @@
 import * as cdk from '@aws-cdk/core';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as iam from '@aws-cdk/aws-iam';
+import * as sns from '@aws-cdk/aws-sns';
+import * as sqs from '@aws-cdk/aws-sqs';
+import * as lambda from '@aws-cdk/aws-lambda';
+import * as sub from '@aws-cdk/aws-sns-subscriptions';
+import * as sources from '@aws-cdk/aws-lambda-event-sources';
+
 import { ApplicationLoadBalancedFargateService } from '@aws-cdk/aws-ecs-patterns';
 import { Repository } from '@aws-cdk/aws-ecr';
 
 export class FargateServiceStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    const queue = new sqs.Queue(this, 'XRayExampleSqsQueue', { queueName: 'x-ray-example-queue' });
+    queue.grantSendMessages(new iam.ServicePrincipal('sns.amazonaws.com'));
+
+    const topic = new sns.Topic(this, 'XRayExampleTopic', { topicName: 'x-ray-example-topic' });
+    topic.addSubscription(new sub.SqsSubscription(queue, { rawMessageDelivery: true }));
+
+    const fn = new lambda.Function(this, 'XRayExampleFunction', {
+      code: lambda.Code.fromAsset('functions'),
+      handler: 'handler.processEvent',
+      runtime: lambda.Runtime.NODEJS_12_X,
+    });
+    fn.addEventSource(new sources.SqsEventSource(queue));
 
     const taskRole = new iam.Role(this, 'TaskRole', {
       assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
@@ -39,6 +58,17 @@ export class FargateServiceStack extends cdk.Stack {
     });
     nodeServiceContainer.addPortMappings({
       containerPort: 80,
+    });
+
+    const xray = taskDefinition.addContainer('xray', {
+      image: ecs.ContainerImage.fromRegistry('amazon/aws-xray-daemon'),
+      cpu: 32,
+      memoryReservationMiB: 256,
+      essential: false,
+    });
+    xray.addPortMappings({
+      containerPort: 2000,
+      protocol: ecs.Protocol.UDP,
     });
 
     new ApplicationLoadBalancedFargateService(this, 'ExampleService', {
