@@ -33,6 +33,9 @@ export class FargateServiceStack extends cdk.Stack {
     taskRole.addManagedPolicy({
       managedPolicyArn: 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy',
     });
+    taskRole.addManagedPolicy({
+      managedPolicyArn: 'arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess',
+    });
     const executionRole = new iam.Role(this, 'ExecutionkRole', {
       assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
     });
