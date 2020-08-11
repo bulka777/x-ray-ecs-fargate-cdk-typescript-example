@@ -19,9 +19,13 @@ app.use(AWSXRay.express.openSegment('MyApp'));
 
 app.get('/', async (req, res) => {
   console.log('Received request...processing');
-  const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
-  console.log('Finished processing. Response: ', response);
-  res.send(response);
+  try {
+    const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
+    console.log('Finished processing. Response: ', response.data);
+    res.send(response.data);
+  } catch (err) {
+    res.send(err.message);
+  }
 });
 
 app.use(AWSXRay.express.closeSegment());
