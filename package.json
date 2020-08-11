@@ -22,7 +22,7 @@
     "run::service": "docker run -p 49160:8080 n0253365/x-ray-ecs-fargate-cdk-typescript"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.56.0",
+    "@aws-cdk/assert": "1.57.0",
     "@types/express": "^4.17.7",
     "@types/jest": "^25.2.1",
     "@types/node": "10.17.5",
@@ -37,7 +37,9 @@
     "typescript": "~3.7.2"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.56.0",
+    "@aws-cdk/aws-ecr": "1.57.0",
+    "@aws-cdk/aws-ecs": "1.57.0",
+    "@aws-cdk/core": "1.57.0",
     "source-map-support": "^0.5.16"
   }
 }
