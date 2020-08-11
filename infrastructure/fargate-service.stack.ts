@@ -13,7 +13,7 @@ export class FargateServiceStack extends cdk.Stack {
     taskRole.addManagedPolicy({
       managedPolicyArn: 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy',
     });
-    const executionRole = new iam.Role(this, 'TaskRole', {
+    const executionRole = new iam.Role(this, 'ExecutionkRole', {
       assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
     });
     executionRole.addManagedPolicy({
@@ -24,6 +24,8 @@ export class FargateServiceStack extends cdk.Stack {
       taskRole,
       executionRole,
       compatibility: ecs.Compatibility.FARGATE,
+      cpu: '1024',
+      memoryMiB: '2048',
     });
 
     new ApplicationLoadBalancedFargateService(this, 'ExampleService', {
