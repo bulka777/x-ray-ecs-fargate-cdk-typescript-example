@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 const HOST = process.env.HOST || 'localhost';
 
 const app = express();

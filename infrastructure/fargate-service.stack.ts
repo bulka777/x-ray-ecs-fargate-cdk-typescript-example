@@ -2,6 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as iam from '@aws-cdk/aws-iam';
 import { ApplicationLoadBalancedFargateService } from '@aws-cdk/aws-ecs-patterns';
+import { Repository } from '@aws-cdk/aws-ecr';
 
 export class FargateServiceStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -26,6 +27,18 @@ export class FargateServiceStack extends cdk.Stack {
       compatibility: ecs.Compatibility.FARGATE,
       cpu: '1024',
       memoryMiB: '2048',
+    });
+
+    const nodeServiceContainer = taskDefinition.addContainer('MainService', {
+      image: ecs.RepositoryImage.fromEcrRepository(
+        Repository.fromRepositoryName(this, 'EcrRepo', 'x-ray-example-ecs-app'),
+      ),
+      logging: new ecs.AwsLogDriver({
+        streamPrefix: 'NodeApp',
+      }),
+    });
+    nodeServiceContainer.addPortMappings({
+      containerPort: 80,
     });
 
     new ApplicationLoadBalancedFargateService(this, 'ExampleService', {
