@@ -7,6 +7,7 @@ import * as AWSXRay from 'aws-xray-sdk';
 
 const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 AWSXRay.captureHTTPsGlobal(require('http'), true);
+AWSXRay.captureHTTPsGlobal(require('https'), true);
 
 import axios from 'axios';
 

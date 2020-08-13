@@ -1,0 +1,32 @@
+{
+  "name": "example-handler",
+  "version": "1.0.0",
+  "description": "Handler to invoke lambda",
+  "main": "handler.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "tsc --build --clean",
+    "test": "jest --passWithNoTests --coverage ./*"
+  },
+  "dependencies": {
+    "lambda-log": "^2.4.0",
+    "aws-sdk": "2.726.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.59",
+    "@types/jest": "^25.1.3",
+    "@types/lambda-log": "^2.2.0",
+    "@types/node": "^13.7.0",
+    "jest": "^25.1.0",
+    "jest-extended": "^0.11.5",
+    "jest-junit": "^10.0.0",
+    "ts-jest": "^25.2.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3"
+  },
+  "keywords": [
+    "lambda"
+  ],
+  "author": "timurabduljalil@gmail.com",
+  "license": "MIT"
+}

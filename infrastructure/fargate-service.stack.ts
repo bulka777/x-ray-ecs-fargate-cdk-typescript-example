@@ -6,6 +6,7 @@ import * as sqs from '@aws-cdk/aws-sqs';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as sub from '@aws-cdk/aws-sns-subscriptions';
 import * as sources from '@aws-cdk/aws-lambda-event-sources';
+import * as path from 'path';
 
 import { ApplicationLoadBalancedFargateService } from '@aws-cdk/aws-ecs-patterns';
 import { Repository } from '@aws-cdk/aws-ecr';
@@ -20,12 +21,12 @@ export class FargateServiceStack extends cdk.Stack {
     const topic = new sns.Topic(this, 'XRayExampleTopic', { topicName: 'x-ray-example-topic' });
     topic.addSubscription(new sub.SqsSubscription(queue, { rawMessageDelivery: true }));
 
-    // const fn = new lambda.Function(this, 'XRayExampleFunction', {
-    //   code: lambda.Code.fromAsset('functions'),
-    //   handler: 'handler.processEvent',
-    //   runtime: lambda.Runtime.NODEJS_12_X,
-    // });
-    // fn.addEventSource(new sources.SqsEventSource(queue));
+    const fn = new lambda.Function(this, 'XRayExampleFunction', {
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/example-handler')),
+      handler: 'handler.processEvent',
+      runtime: lambda.Runtime.NODEJS_12_X,
+    });
+    fn.addEventSource(new sources.SqsEventSource(queue));
 
     const taskRole = new iam.Role(this, 'TaskRole', {
       assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
