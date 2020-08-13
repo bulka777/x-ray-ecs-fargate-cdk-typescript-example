@@ -25,6 +25,7 @@ export class FargateServiceStack extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, '../functions/example-handler')),
       handler: 'handler.processEvent',
       runtime: lambda.Runtime.NODEJS_12_X,
+      tracing: lambda.Tracing.ACTIVE,
     });
     fn.addEventSource(new sources.SqsEventSource(queue));
 
