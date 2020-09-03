@@ -19,7 +19,7 @@ export class FargateServiceStack extends cdk.Stack {
     queue.grantSendMessages(new iam.ServicePrincipal('sns.amazonaws.com'));
 
     const topic = new sns.Topic(this, 'XRayExampleTopic', { topicName: 'x-ray-example-topic' });
-    topic.addSubscription(new sub.SqsSubscription(queue, { rawMessageDelivery: true }));
+    topic.addSubscription(new sub.SqsSubscription(queue));
 
     const fn = new lambda.Function(this, 'XRayExampleFunction', {
       code: lambda.Code.fromAsset(path.join(__dirname, '../functions/example-handler')),
@@ -28,6 +28,9 @@ export class FargateServiceStack extends cdk.Stack {
       tracing: lambda.Tracing.ACTIVE,
     });
     fn.addEventSource(new sources.SqsEventSource(queue));
+    fn.role?.addManagedPolicy({
+      managedPolicyArn: 'arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess',
+    });
 
     const taskRole = new iam.Role(this, 'TaskRole', {
       assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
@@ -44,6 +47,8 @@ export class FargateServiceStack extends cdk.Stack {
     executionRole.addManagedPolicy({
       managedPolicyArn: 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy',
     });
+
+    topic.grantPublish(taskRole);
 
     const taskDefinition = new ecs.TaskDefinition(this, 'TaskDefinition', {
       taskRole,

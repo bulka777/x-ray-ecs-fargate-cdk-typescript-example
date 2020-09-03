@@ -1,9 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.processEvent = void 0;
-const log = require("lambda-log");
-async function processEvent(event) {
-    log.info('Received the following eent: ', event);
-}
-exports.processEvent = processEvent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGFuZGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImhhbmRsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQ0Esa0NBQW1DO0FBRTVCLEtBQUssVUFBVSxZQUFZLENBQUMsS0FBZTtJQUNoRCxHQUFHLENBQUMsSUFBSSxDQUFDLCtCQUErQixFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQ25ELENBQUM7QUFGRCxvQ0FFQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFNRU0V2ZW50IH0gZnJvbSAnYXdzLWxhbWJkYSc7XG5pbXBvcnQgbG9nID0gcmVxdWlyZSgnbGFtYmRhLWxvZycpO1xuXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gcHJvY2Vzc0V2ZW50KGV2ZW50OiBTUVNFdmVudCk6IFByb21pc2U8dm9pZD4ge1xuICBsb2cuaW5mbygnUmVjZWl2ZWQgdGhlIGZvbGxvd2luZyBlZW50OiAnLCBldmVudCk7XG59XG4iXX0=
