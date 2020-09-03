@@ -1,0 +1,21 @@
+{
+  "name": "example-node-service",
+  "version": "1.0.0",
+  "description": "Node service to run in ECS",
+  "main": "server.js",
+  "dependencies": {
+    "aws-sdk": "2.730.0",
+    "aws-xray-sdk": "3.1.0",
+    "axios": "^0.19.2",
+    "express": "^4.17.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.7"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Timur Abduljalil <timurabduljalil@gmail.com>",
+  "license": "ISC"
+}

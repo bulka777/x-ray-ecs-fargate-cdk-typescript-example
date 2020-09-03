@@ -1,7 +1,7 @@
 {
-  "name": "cdk-template",
+  "name": "x-ray-ecs-fargate-cdk-typescript-example",
   "version": "1.0.0",
-  "description": "Template for CDK projects",
+  "description": "Example showing how to set up xray with ecs fargate project",
   "author": {
     "email": "timurabduljalil@gmail.com",
     "name": "Timur Abduljalil"
@@ -17,10 +17,12 @@
     "test": "jest",
     "cdk": "cdk",
     "lint": "eslint . --ext .ts",
-    "synth": "cdk synth > template.yml"
+    "synth": "cdk synth --no-staging > template.yml",
+    "build::service": "cd service && tsc && docker build -t x-ray-ecs-fargate-cdk-typescript-example-image .",
+    "run::service": "docker run -p 49160:8080 n0253365/x-ray-ecs-fargate-cdk-typescript"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.56.0",
+    "@aws-cdk/assert": "1.55.0",
     "@types/jest": "^25.2.1",
     "@types/node": "10.17.5",
     "@typescript-eslint/eslint-plugin": "^2.12.0",
@@ -34,7 +36,16 @@
     "typescript": "~3.7.2"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.56.0",
+    "@aws-cdk/aws-ecr": "1.55.0",
+    "@aws-cdk/aws-ecs": "1.55.0",
+    "@aws-cdk/aws-ecs-patterns": "1.55.0",
+    "@aws-cdk/aws-iam": "1.55.0",
+    "@aws-cdk/aws-lambda": "1.55.0",
+    "@aws-cdk/aws-lambda-event-sources": "1.55.0",
+    "@aws-cdk/aws-sns": "1.55.0",
+    "@aws-cdk/aws-sns-subscriptions": "1.55.0",
+    "@aws-cdk/aws-sqs": "1.55.0",
+    "@aws-cdk/core": "1.55.0",
     "source-map-support": "^0.5.16"
   }
 }

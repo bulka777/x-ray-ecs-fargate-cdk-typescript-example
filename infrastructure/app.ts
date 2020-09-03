@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { MyStack } from './stack';
+import { EcrStack } from './ecr.stack';
+import { FargateServiceStack } from './fargate-service.stack';
 
 const app = new cdk.App();
-new MyStack(app, 'MyStack', { env: { region: 'us-east-2', account: '776387660326' } });
+new EcrStack(app, 'EcrStack', { env: { region: 'us-east-2', account: '776387660326' } });
+new FargateServiceStack(app, 'FargateServiceStack', { env: { region: 'us-east-2', account: '776387660326' } });
