@@ -1,8 +1,13 @@
-# Welcome to your CDK TypeScript project!
+# Example for ECS Fargate Service with X-Ray
 
-This is a blank project for TypeScript development with CDK.
+This project is an example of how ECS Fargate can be set up with X-Ray Daemon and instrumented to collect traces across the system. This is used to support the article here: https://medium.com/@timur137/x-ray-vision-fbeee441748?sk=1cfdc1fd7210a7d7e3bc400c15d87c73
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Structure
+* `infrastructure` folder has all the cdk related constructs. For ECS Fargate, we need to be able to use to store our docker image somewhere, so this folder 
+contains both the ECR stack for storing an image in AWS Repo and the Fargate stack to define all other components. You might also find other resources like SNS and 
+SQS to support tracing example
+* `service` defines a potential ECS fargate service
+
 
 ## Useful commands
 
