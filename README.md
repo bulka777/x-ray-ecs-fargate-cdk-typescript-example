@@ -1,6 +1,6 @@
 # Example for ECS Fargate Service with X-Ray
 
-This project is an example of how ECS Fargate can be set up with X-Ray Daemon and instrumented to collect traces across the system. This is used to support the article here: https://medium.com/@timur137/x-ray-vision-fbeee441748?sk=1cfdc1fd7210a7d7e3bc400c15d87c73
+This project is an example of how ECS Fargate can be set up with X-Ray Daemon and instrumented to collect traces across the system. This is used to support the article here: https://medium.com/@timur137/x-ray-vision-fbeee441748
 
 ## Structure
 * `infrastructure` folder has all the cdk related constructs. For ECS Fargate, we need to be able to use to store our docker image somewhere, so this folder 
